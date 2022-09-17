@@ -33,11 +33,11 @@ const Sharevideos = () => {
 
   return (
     <div>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="flex items-center justify-center">
         <input
           type="text"
           name="video"
-          placeholder="Type here"
+          placeholder="paste youtube video url here"
           className="input input-bordered w-full max-w-xs"
         />
         <input type="submit" className="btn btn-success" />

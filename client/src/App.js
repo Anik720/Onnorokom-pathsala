@@ -20,7 +20,14 @@ function App() {
         <Route path="/home" element={<Home></Home>}></Route>
         <Route path="login" element={<Login></Login>}></Route>
         <Route path="signup" element={<Signup></Signup>}></Route>
-        <Route path="dashboard" element={<Userdashboard></Userdashboard>}></Route>
+        <Route
+          path="dashboard"
+          element={
+            <RequireAuth>
+              <Userdashboard></Userdashboard>
+            </RequireAuth>
+          }
+        ></Route>
 
         <Route
           path="share"

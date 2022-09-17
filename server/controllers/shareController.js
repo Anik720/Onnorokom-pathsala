@@ -25,10 +25,18 @@ exports.getAllShare = catchAsync(async (req, res, next) => {
 });
 exports.getAllShareByLoggedinUser = catchAsync(async (req, res, next) => {
   const user = req.user._id;
-  const share = await Share.find({ user: user }).populate({ path: "likes" });
+  let arr=[]
+  arr.push(user)
+  const share = await Share.find({} );
+
+ let videos= share.filter(x=>{
+  console.log(x)
+    return JSON.stringify(x.user._id)===JSON.stringify(user) 
+  })
+console.log(videos)
   res.status(200).json({
     message: "success",
-    share,
+    videos,
   });
 });
 

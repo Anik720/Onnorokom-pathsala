@@ -5,7 +5,7 @@ const Video = ({ video, likes }) => {
   const [count, setCount] = useState();
   const [users, setUsers] = useState([]);
   const [likedUsers, setlikedUsers] = useState("");
- // console.log("likes",video)
+  // console.log("likes", video.user.name);
 
   useEffect(() => {
     if (JSON.stringify(video._id) === JSON.stringify(likes[0]?.video[0])) {
@@ -77,16 +77,17 @@ const Video = ({ video, likes }) => {
         function onlyUnique(value, index, self) {
           return self.indexOf(value) === index;
         }
-
+        //console.log("data",data)
         // usage example:
-        var a = data?.likes[1]?.user;
+        var a = data?.likes[0]?.user;
 
         let b = [];
         a.map((x) => {
           b.push(x._id);
         });
+        //  console.log(a);
         var unique = b.filter(onlyUnique);
-        console.log(unique);
+        // console.log(unique);
         fetch(`http://localhost:7000/api/users/getLikedUsers`, {
           method: "POST",
           headers: {
@@ -99,39 +100,26 @@ const Video = ({ video, likes }) => {
         })
           .then((response) => response.json())
           .then((data) => {
-            console.log("Success:", data.names);
+            // console.log("Success:", data.names);
             setUsers(data.names);
           })
           .catch((error) => {
             console.error("Error:", error);
           });
         //setUsers(unique)
-        return (
-          <>
-            <input type="checkbox" id="my-modal-3" className="modal-toggle" />
-            <div className="modal">
-              <div className="modal-box relative">
-                <label
-                  htmlFor="my-modal-3"
-                  className="btn btn-sm btn-circle absolute right-2 top-2"
-                >
-                  ✕
-                </label>
-                <h3 className="text-lg font-bold">Liked by:</h3>
-                <p className="py-4">
-                  You've been selected for a chance to get one year of
-                  subscription to use Wikipedia for free!
-                </p>
-              </div>
-            </div>
-          </>
-        );
       });
+  };
+
+  const handleVideoViewCount = (e) => {
+    e.preventDefault();
+    console.log("hello");
   };
   return (
     <div className="">
-      <ReactPlayer url={video.link} width="400px" height="400px" />
-      <p className="mr-10">posted by: {video.user[0]?.name} </p>
+    
+        <ReactPlayer url={video.link} width="400px" height="400px" onClick={handleVideoViewCount} />
+    
+      <p className="mr-10 text-black">posted by: {video.user.name} </p>
       <div className="flex ">
         <button className="mr-10" onClick={handleLike}>
           Like
@@ -150,9 +138,11 @@ const Video = ({ video, likes }) => {
             Show Detail
           </label>
 
-          <p> {users.length !== 0 ? <p> Liked by: {users}</p> : ""} </p>
+         
         </div>
+
       </div>
+      <p> {users.length !== 0 ? <p> Liked by: {users}</p> : ""} </p>
       <ToastContainer></ToastContainer>
     </div>
   );

@@ -14,8 +14,8 @@ const Userdashboard = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data.share);
-        setShare(data.share);
+        console.log(data.videos);
+        setShare(data.videos);
       });
   }, []);
   return (

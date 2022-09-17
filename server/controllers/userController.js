@@ -29,10 +29,10 @@ let names=[]
 users.map(user=>{
   names.push(user.name)
 })
-console.log(names.join(" "))
+console.log(usersArray)
   res.status(201).json({
     message:"Success",
-    names:names.join(" ")
+    names:names.join(", ")
   })
 })
 

@@ -11,12 +11,10 @@ const shareSchema = new mongoose.Schema(
       default: 0,
     },
 
-    user: [
-      {
-        type: mongoose.Schema.ObjectId,
-        ref: "User",
-      },
-    ],
+    user: {
+      type: mongoose.Schema.ObjectId,
+      ref: "User",
+    },
   },
   {
     timestamps: true,
